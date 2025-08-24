@@ -72,7 +72,7 @@ option(OPT_BUILD_AUTO_DF "Build Auto DF module" ON)
 
 # Other options
 option(USE_INTERNAL_LIBCORRECT "Use an internal version of libcorrect" ON)
-option(USE_BUNDLE_DEFAULTS "Set the default resource and module directories to the right ones for a MacOS .app" ON)
+option(USE_BUNDLE_DEFAULTS "Set the default resource and module directories to the right ones for a MacOS .app" OFF)
 option(COPY_MSVC_REDISTRIBUTABLES "Copy over the Visual C++ Redistributable" OFF)
 
 # Module cmake path
