@@ -3,6 +3,8 @@
 #include <gui/gui.h>
 #include <core.h>
 #include <chrono>
+#include <sstream>
+#include <iomanip>
 
 SDRPP_MOD_INFO{
     /* Name:            */ "auto_df",
@@ -136,19 +138,40 @@ private:
         udpThread.detach(); // Run in background
     }
     
+    std::string getCurrentTimestamp() {
+        // Get current time as milliseconds since epoch
+        auto now = std::chrono::system_clock::now();
+        auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+        return std::to_string(timestamp);
+    }
+    
+    std::string createJsonMessage(double frequency) {
+        std::stringstream json;
+        json << std::fixed << std::setprecision(0); // No decimal places for frequency
+        
+        json << "{"
+             << "\"type\":\"number\","
+             << "\"data\":{"
+             << "\"value\":" << frequency
+             << "},"
+             << "\"timestamp\":" << getCurrentTimestamp()
+             << "}";
+        
+        return json.str();
+    }
+    
     void sendUDP(double frequency) {
-        // Create simple message with just frequency (for Electron compatibility)
-        char message[64];
-        snprintf(message, sizeof(message), "%.0f", frequency);
+        // Create JSON message
+        std::string jsonMessage = createJsonMessage(frequency);
         
         // Use netcat (nc) command to send UDP packet - using private port 55555
         std::stringstream command;
-        command << "echo '" << message << "' | nc -u -w1 127.0.0.1 55555 2>/dev/null";
+        command << "echo '" << jsonMessage << "' | nc -u -w1 127.0.0.1 55555 2>/dev/null";
         
         int result = system(command.str().c_str());
         
         if (result == 0) {
-            printf("UDP sent: %s to 127.0.0.1:55555\n", message);
+            printf("UDP sent: %s to 127.0.0.1:55555\n", jsonMessage.c_str());
         } else {
             printf("UDP ERROR: Failed to send packet (is netcat installed?)\n");
         }
