@@ -24,3 +24,6 @@ OPT_BUILD_AUTO_DF
 Other options yg ON
 USE_INTERNAL_LIBCORRECT
 USE_BUNDLE_DEFAULTS (khusus MacOS)
+
+run dengan
+./sdrpp -r ../root_dev/
