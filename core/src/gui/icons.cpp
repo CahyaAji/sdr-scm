@@ -1,3 +1,4 @@
+// mark edit
 #include <gui/icons.h>
 #include <stdint.h>
 #include <config.h>
@@ -16,6 +17,8 @@ namespace icons {
     ImTextureID UNMUTED;
     ImTextureID NORMAL_TUNING;
     ImTextureID CENTER_TUNING;
+    ImTextureID SPLASH_LOGO;
+    ImTextureID ELANG_LOGO;
 
     GLuint loadTexture(std::string path) {
         int w, h, n;
@@ -37,7 +40,7 @@ namespace icons {
             return false;
         }
 
-        LOGO = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/sdrpp.png");
+        LOGO = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/monobs512.png");
         PLAY = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/play.png");
         STOP = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/stop.png");
         MENU = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/menu.png");
@@ -45,6 +48,9 @@ namespace icons {
         UNMUTED = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/unmuted.png");
         NORMAL_TUNING = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/normal_tuning.png");
         CENTER_TUNING = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/center_tuning.png");
+        SPLASH_LOGO = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/splash251.png");
+        ELANG_LOGO = (ImTextureID)(uintptr_t)loadTexture(resDir + "/icons/elang64.png");
+
 
         return true;
     }

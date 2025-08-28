@@ -1,3 +1,4 @@
+// mark edit
 #include <gui/dialogs/loading_screen.h>
 #include <gui/main_window.h>
 #include <imgui.h>
@@ -11,7 +12,7 @@ namespace LoadingScreen {
     ImVec2 imageSize(128.0f, 128.0f);
 
     void init() {
-        imageSize = ImVec2(128.0f * style::uiScale, 128.0f * style::uiScale);
+        imageSize = ImVec2(506.0f * style::uiScale, 251.0f * style::uiScale);
     }
 
     void show(std::string msg) {
@@ -25,11 +26,11 @@ namespace LoadingScreen {
         ImGui::PushStyleColor(ImGuiCol_ModalWindowDimBg, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
         ImGui::BeginPopupModal("Credits", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground);
 
-        ImGui::PushFont(style::hugeFont);
-        ImGui::TextUnformatted("SDR++    ");
-        ImGui::PopFont();
-        ImGui::SameLine();
-        ImGui::Image(icons::LOGO, imageSize);
+        // ImGui::PushFont(style::hugeFont);
+        // ImGui::TextUnformatted("SDR++    ");
+        // ImGui::PopFont();
+        // ImGui::SameLine();
+        ImGui::Image(icons::SPLASH_LOGO, imageSize);
 
         ImVec2 origPos = ImGui::GetCursorPos();
         ImGui::SetCursorPosY(origPos.y + 50);

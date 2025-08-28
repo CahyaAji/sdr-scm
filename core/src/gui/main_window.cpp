@@ -1,3 +1,4 @@
+// mark edit
 #include <gui/main_window.h>
 #include <gui/gui.h>
 #include "imgui.h"
@@ -423,8 +424,8 @@ void MainWindow::draw() {
     // Logo button
     ImGui::SetCursorPosX(ImGui::GetWindowSize().x - (48 * style::uiScale));
     ImGui::SetCursorPosY(10.0f * style::uiScale);
-    if (ImGui::ImageButton(icons::LOGO, ImVec2(32 * style::uiScale, 32 * style::uiScale), ImVec2(0, 0), ImVec2(1, 1), 0)) {
-        showCredits = true;
+    if (ImGui::ImageButton(icons::ELANG_LOGO, ImVec2(39 * style::uiScale, 40 * style::uiScale), ImVec2(0, 0), ImVec2(1, 1), 0)) {
+        showCredits = false;
     }
     if (ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
         showCredits = false;

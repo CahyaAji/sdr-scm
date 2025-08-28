@@ -37,7 +37,7 @@ namespace backend {
         false
     };
 
-    #define OPENGL_VERSION_COUNT (sizeof(OPENGL_VERSIONS_GLSL) / sizeof(char*))
+#define OPENGL_VERSION_COUNT (sizeof(OPENGL_VERSIONS_GLSL) / sizeof(char*))
 
     bool maximized = false;
     bool fullScreen = false;
@@ -77,7 +77,7 @@ namespace backend {
             return 1;
         }
 
-    #ifdef __APPLE__
+#ifdef __APPLE__
         // GL 3.2 + GLSL 150
         const char* glsl_version = "#version 150";
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -87,11 +87,11 @@ namespace backend {
 
         // Create window with graphics context
         monitor = glfwGetPrimaryMonitor();
-        window = glfwCreateWindow(winWidth, winHeight, "SDR++ v" VERSION_STR " (Built at " __TIME__ ", " __DATE__ ")", NULL, NULL);
+        window = glfwCreateWindow(winWidth, winHeight, "Monobs-" VERSION_STR " (Built: " __DATE__ ")", NULL, NULL);
         if (window == NULL)
             return 1;
         glfwMakeContextCurrent(window);
-    #else
+#else
         const char* glsl_version = "#version 120";
         monitor = NULL;
         for (int i = 0; i < OPENGL_VERSION_COUNT; i++) {
@@ -99,13 +99,13 @@ namespace backend {
             glfwWindowHint(GLFW_CLIENT_API, OPENGL_VERSIONS_IS_ES[i] ? GLFW_OPENGL_ES_API : GLFW_OPENGL_API);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_VERSIONS_MAJOR[i]);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_VERSIONS_MINOR[i]);
-    #if GLFW_VERSION_MAJOR > 3 || (GLFW_VERSION_MAJOR == 3 && GLFW_VERSION_MINOR >= 4)
+#if GLFW_VERSION_MAJOR > 3 || (GLFW_VERSION_MAJOR == 3 && GLFW_VERSION_MINOR >= 4)
             glfwWindowHintString(GLFW_WAYLAND_APP_ID, "sdrpp");
-    #endif
-            
+#endif
+
             // Create window with graphics context
             monitor = glfwGetPrimaryMonitor();
-            window = glfwCreateWindow(winWidth, winHeight, "SDR++ v" VERSION_STR " (Built at " __TIME__ ", " __DATE__ ")", NULL, NULL);
+            window = glfwCreateWindow(winWidth, winHeight, "Monobs-" VERSION_STR " (Built: " __DATE__ ")", NULL, NULL);
             if (window == NULL) {
                 flog::info("OpenGL {0}.{1} {2}was not supported", OPENGL_VERSIONS_MAJOR[i], OPENGL_VERSIONS_MINOR[i], OPENGL_VERSIONS_IS_ES[i] ? "ES " : "");
                 continue;
@@ -115,7 +115,7 @@ namespace backend {
             break;
         }
 
-    #endif
+#endif
 
         // Load app icon
         if (!std::filesystem::is_regular_file(resDir + "/icons/sdrpp.png")) {
@@ -159,13 +159,13 @@ namespace backend {
         }
 
         // Add callback for max/min if GLFW supports it
-    #if (GLFW_VERSION_MAJOR == 3) && (GLFW_VERSION_MINOR >= 3)
+#if (GLFW_VERSION_MAJOR == 3) && (GLFW_VERSION_MINOR >= 3)
         if (maximized) {
             glfwMaximizeWindow(window);
         }
 
         glfwSetWindowMaximizeCallback(window, maximized_callback);
-    #endif
+#endif
 
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();
@@ -238,7 +238,7 @@ namespace backend {
             glfwPollEvents();
 
             beginFrame();
-            
+
             if (_maximized != maximized) {
                 _maximized = maximized;
                 core::configManager.acquire();

@@ -354,6 +354,8 @@ else ()
     add_executable(sdrpp "src/main.cpp")
 endif ()
 
+set_target_properties(sdrpp PROPERTIES OUTPUT_NAME "elang-monobs")
+
 target_link_libraries(sdrpp PRIVATE sdrpp_core)
 
 # Compiler arguments

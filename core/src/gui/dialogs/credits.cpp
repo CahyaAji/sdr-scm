@@ -1,3 +1,4 @@
+// mark edit
 #include <gui/dialogs/credits.h>
 #include <imgui.h>
 #include <gui/icons.h>
@@ -23,10 +24,10 @@ namespace credits {
         ImGui::OpenPopup("Credits");
         ImGui::BeginPopupModal("Credits", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove);
 
-        ImGui::PushFont(style::hugeFont);
-        ImGui::TextUnformatted("SDR++          ");
-        ImGui::PopFont();
-        ImGui::SameLine();
+        // ImGui::PushFont(style::hugeFont);
+        // ImGui::TextUnformatted("SDR++          ");
+        // ImGui::PopFont();
+        // ImGui::SameLine();
         ImGui::Image(icons::LOGO, imageSize);
         ImGui::Spacing();
         ImGui::Spacing();
