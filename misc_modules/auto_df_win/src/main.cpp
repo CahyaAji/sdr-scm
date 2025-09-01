@@ -1,3 +1,12 @@
+// Windows networking - must be first to avoid conflicts
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN // Excludes rarely-used stuff from Windows headers
+#include <windows.h>        // Must come before winsock2.h
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#pragma comment(lib, "ws2_32.lib")
+#endif
+
 #include <imgui.h>
 #include <module.h>
 #include <gui/gui.h>
@@ -6,11 +15,6 @@
 #include <sstream>
 #include <iomanip>
 #include <thread>
-
-// Windows networking includes
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#pragma comment(lib, "ws2_32.lib")
 
 SDRPP_MOD_INFO{
     /* Name:            */ "auto_df_win",
