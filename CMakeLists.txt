@@ -69,6 +69,7 @@ option(OPT_BUILD_SCHEDULER "Build the scheduler" OFF)
 # ini
 option(OPT_BUILD_DEMO "Build the demo module" OFF)
 option(OPT_BUILD_AUTO_DF "Build Auto DF module" ON)
+option(OPT_BUILD_PEAK_SCANNER "Frequency scanner with peak detection" ON)
 
 # Other options
 option(USE_INTERNAL_LIBCORRECT "Use an internal version of libcorrect" ON)
@@ -348,6 +349,10 @@ if (OPT_BUILD_AUTO_DF)
     add_subdirectory("misc_modules/auto_df")
 endif (OPT_BUILD_AUTO_DF)
 
+if (OPT_BUILD_PEAK_SCANNER)
+add_subdirectory("misc_modules/peak_scanner")
+endif (OPT_BUILD_PEAK_SCANNER)
+
 if (MSVC)
     add_executable(sdrpp "src/main.cpp" "win32/resources.rc")
 else ()
@@ -362,6 +367,10 @@ target_link_libraries(sdrpp PRIVATE sdrpp_core)
 target_compile_options(sdrpp PRIVATE ${SDRPP_COMPILER_FLAGS})
 
 # Copy dynamic libs over
+# if (MSVC)
+#     add_custom_target(do_always ALL xcopy /s \"$<TARGET_FILE_DIR:sdrpp_core>\\*.dll\" \"$<TARGET_FILE_DIR:sdrpp>\" /Y)
+#     add_custom_target(do_always_volk ALL xcopy /s \"C:/Program Files/PothosSDR/bin\\volk.dll\" \"$<TARGET_FILE_DIR:sdrpp>\" /Y)
+# endif ()
 if (MSVC)
     add_custom_target(do_always ALL xcopy /s \"$<TARGET_FILE_DIR:sdrpp_core>\\*.dll\" \"$<TARGET_FILE_DIR:sdrpp>\" /Y)
     add_custom_target(do_always_volk ALL xcopy /s \"C:/Program Files/PothosSDR/bin\\volk.dll\" \"$<TARGET_FILE_DIR:sdrpp>\" /Y)
